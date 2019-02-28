@@ -1,6 +1,9 @@
 # Ignore object files #
-###################
 *.o
+# Ignore text files #
+*.txt
+#########################
+# Ignore just some files #
 exampleFCFS
 exampleRetro
 exampleRR
