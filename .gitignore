@@ -1,3 +1,7 @@
 # Ignore object files #
 ###################
 *.o
+exampleFCFS
+exampleRetro
+exampleRR
+exampleRR2
