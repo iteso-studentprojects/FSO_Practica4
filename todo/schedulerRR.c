@@ -55,4 +55,14 @@ void scheduler(int arguments)
 		_swapthreads(old,next);
 	}
 
+	if( event == TIMER )
+	{
+		if( _emptyq(&ready) == 0 )
+		{
+			threads[callingthread].status=READY;
+			_enqueue(&ready,callingthread);
+			changethread = 1;
+		}
+	}
+
 }
