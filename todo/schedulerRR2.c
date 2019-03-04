@@ -5,6 +5,8 @@ extern int currthread;
 extern int blockevent;
 extern int unblockevent;
 
+
+
 QUEUE ready;
 QUEUE waitinginevent[MAXTHREAD];
 
@@ -16,6 +18,28 @@ void scheduler(int arguments)
 	
 	int event=arguments & 0xFF00;
 	int callingthread=arguments & 0xFF;
+
+	short quantumflag = 0;
+	
+
+	if( event == TIMER )
+	{
+		if( quantumflag == 2)
+		{
+
+			if( _emptyq(&ready) == 0 && quantumflag == 2 )
+			{
+			threads[callingthread].status=READY;
+			_enqueue(&ready,callingthread);
+			changethread = 1;
+			}
+
+			quantumflag = 0;
+
+		}
+		
+		quantumflag++;
+	}
 
 	if(event==NEWTHREAD)
 	{
