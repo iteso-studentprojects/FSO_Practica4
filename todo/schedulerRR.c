@@ -17,6 +17,16 @@ void scheduler(int arguments)
 	int event=arguments & 0xFF00;
 	int callingthread=arguments & 0xFF;
 
+	if( event == TIMER )
+	{
+		if( _emptyq(&ready) == 0 )
+		{
+			threads[callingthread].status=READY;
+			_enqueue(&ready,callingthread);
+			changethread = 1;
+		}
+	}
+
 	if(event==NEWTHREAD)
 	{
 		// Un nuevo hilo va a la cola de listos
@@ -55,6 +65,7 @@ void scheduler(int arguments)
 		_swapthreads(old,next);
 	}
 
+/*
 	if( event == TIMER )
 	{
 		if( _emptyq(&ready) == 0 )
@@ -63,6 +74,6 @@ void scheduler(int arguments)
 			_enqueue(&ready,callingthread);
 			changethread = 1;
 		}
-	}
+	}*/
 
 }
