@@ -5,7 +5,7 @@ extern int currthread;
 extern int blockevent;
 extern int unblockevent;
 
-
+short quantumflag = 0;
 
 QUEUE ready;
 QUEUE waitinginevent[MAXTHREAD];
@@ -18,9 +18,6 @@ void scheduler(int arguments)
 	
 	int event=arguments & 0xFF00;
 	int callingthread=arguments & 0xFF;
-
-	short quantumflag = 0;
-	
 
 	if( event == TIMER )
 	{
